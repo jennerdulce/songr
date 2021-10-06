@@ -12,10 +12,26 @@
     <h1>Songr</h1>
 </header>
 <main>
+    <form action="/" method="post">
+        <fieldset>
+            <legend>Add Album</legend>
+            <label for="artist"> Artist Name:</label>
+            <input type="text" name="artist">
+            <label for="title"> Album Title:</label>
+            <input type="text" name="title">
+            <label for="songCount"> Song Count:</label>
+            <input type="text" name="songCount">
+            <label for="lengthInS"> Album Length in Seconds:</label>
+            <input type="text" name="lengthInS">
+            <label for="imageURL"> Image Url:</label>
+            <input type="text" name="imageURL">
+            <input type="submit" value="Add">
+        </fieldset>
+    </form>
     <ul th:each="album : ${albums}">
         <li th:text="${album.artist}">ARTIST NAME</li>
         <li><img th:src="${album.imageUrl}" src="" alt="Image Of Album"></li>
-        <li th:text="${album.name}">ALBUM NAME</li>
+        <li th:text="${album.title}">ALBUM NAME</li>
         <li th:text="${album.songCount}">SONG COUNT</li>
         <li th:text="${album.lengthInS}">LENGTH</li>
     </ul>
