@@ -1,8 +1,9 @@
 package com.jennerdulce.songr.models;
 
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // Store in the db
 @Entity
@@ -18,10 +19,10 @@ public class Album {
     int songCount;
     int lengthInS;
     String imageUrl;
-
+    @OneToMany(mappedBy = "myAlbum")
+    List<Song> songsInThisAlbum;
     // JPA and Hibernate NEED Default constructor
     protected Album(){
-
     }
 
     public Album(String title, String artist, int songCount, int lengthInS, String imageUrl) {
@@ -50,5 +51,13 @@ public class Album {
     public void setImageUrl(String path)
     {
         this.imageUrl = path;
+    }
+
+    public List<Song> getSongsInThisAlbum() {
+        return songsInThisAlbum;
+    }
+
+    public void setSongsInThisAlbum(List<Song> songsInThisAlbum) {
+        this.songsInThisAlbum = songsInThisAlbum;
     }
 }

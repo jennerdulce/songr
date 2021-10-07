@@ -28,12 +28,32 @@
             <input type="submit" value="Add">
         </fieldset>
     </form>
+
     <ul th:each="album : ${albums}">
         <li th:text="${album.artist}">ARTIST NAME</li>
-        <li><img th:src="${album.imageUrl}" src="" alt="Image Of Album"></li>
+        <li><a th:href="'/displayAlbum/' + ${album.title}"><img th:src="${album.imageUrl}"  alt="Image Of Album"></a></li>
         <li th:text="${album.title}">ALBUM NAME</li>
         <li th:text="${album.songCount}">SONG COUNT</li>
+        <div>SONGS:</div>
+        <ul th:each="song : ${album.songsInThisAlbum}">
+            <li class="song-title" th:text="'Song Title: ' + ${song.title}"></li>
+            <li th:text="'Track number: ' + ${song.trackNumber}"></li>
+            <li th:text="'Length: ' + ${song.length}"></li>
+        </ul>
         <li th:text="${album.lengthInS}">LENGTH</li>
+        <form action="/add-song" method="post">
+            <fieldset>
+                <legend>Add Song To Album</legend>
+                <label for="artist"> Song Name:</label>
+                <input type="text" name="title">
+                <label for="length"> Length:</label>
+                <input type="text" name="length">
+                <label for="songCount"> Track Number:</label>
+                <input type="text" name="trackNumber">
+                <input type="hidden" name="album" th:value="${album.title}">
+                <input type="submit" value="Add">
+            </fieldset>
+        </form>
     </ul>
 </main>
 <footer>
